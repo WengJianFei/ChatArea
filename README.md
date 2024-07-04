@@ -94,9 +94,9 @@ const chat = new ChatArea({
 // Modify the configuration items of an instance object, where the configuration attributes are optional and can be passed in as needed for modification.
 chat.updateConfig({
     userProps: { id: 'userId', name: 'userName' },
-    userList: [{ userId: 'NEW1', userName: '新的人员' }],
+    userList: [{ userId: 'NEW1', userName: 'new user' }],
     needCallEvery: false,
-    placeholder: '新的提示语',
+    placeholder: 'new placeholder',
     // more config...
 })
 
@@ -171,7 +171,7 @@ chat.revisePCCheckDialogLabel({
 // Modify the default copywriting for the H5 selection pop-up window
 chat.reviseH5DialogLabel({
     title: 'Select the person to remind',
-    searchPlaceholder: 'Search for person's name',
+    searchPlaceholder: 'Search for person\'s name',
     confirmLabel: 'Confirm',
     cancelLabel: 'Cancel'
 })
