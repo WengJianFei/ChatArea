@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>deBug</title>
+    <link rel="stylesheet" href="./es5/ChatArea.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #app {
+            padding: 20px;
+        }
+
+        #msg1 {
+            padding: 10px;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        #msg1 .at-user {
+            margin: 0 1px;
+            color: #269AFF;
+        }
+
+
+        .info {
+        	margin-top: 10px;
+        	color: #666;
+        	font-weight: bold;
+        }
+
+        .call-user-dialog {
+            width: 260px;
+        }
+
+        .checkbox-dialog-option-btn {
+            text-indent: 0 !important;
+            letter-spacing: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p class="info">Please try typing "@" in the input box.</p>
+        <div id="chat"></div>
+
+        <p class="info">Message echo - view the display effect after sending</p>
+        <div id="msg1"></div>
+
+        <p class="info">Extended interaction</p>
+        <button id="btn1">Send message</button>
+        <button id="btn2">Manually insert @person</button>
+        <button id="btn3">Print selected @person list in the console</button>
+        <button id="btn4">Insert image at cursor position</button>
+        <button id="btn5">Insert text at cursor position</button>
+        <button id="btn6">Move cursor to the end</button>
+        <button id="btn7">Cursor-based person selection</button>
+        <button id="btn8">Multi-select people</button>
+        <button id="btn9">Fill the sent message back into the input box</button>
+        <button id="btn10">Perform undo</button>
+        <button id="btn11">Clear text box</button>
+        <button id="btn12">Destroy instance</button>
+    </div>
+
+    <script src="./es5/System.js"></script>
+    <script type="systemjs-importmap">
+        {
+          "imports": {
+            "ChatArea": "./es5/ChatArea.js"
+          }
+        }
+    </script>
+    <script>
+        var initChat = function (ChatArea) {
+            var chat = new ChatArea({
+                elm: document.getElementById('chat'),
+                placeholder: 'Type "@" to bring up the selection window, use "Ctrl+Enter" to start a new line, and "Enter" to send. Version v4.4.2.',
+                userList: [
+                    {
+                        id: '1',
+                        name: 'Adam',
+                        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                    },
+                    {
+                        id: '2',
+                        name: 'Benjamin'
+                    },
+                    {
+                        id: '5',
+                        name: 'Daniel'
+                    },
+                    {
+                        id: '6',
+                        name: 'Ethan'
+                    }
+                ],
+                callEveryLabel: 'Everyone'
+                // more config...
+            });
+            chat.revisePCPointDialogLabel({
+                title: 'Group members',
+                checkLabel: 'Multi-select'
+            });
+            chat.revisePCCheckDialogLabel({
+                title: 'Select the person(s) to "@"',
+                searchPlaceholder: 'Search for person\'s name',
+                searchEmptyLabel: 'No matching results found',
+                userTagTitle: 'List of seminar participants',
+                checkAllLabel: 'Select all',
+                confirmLabel: 'Confirm',
+                cancelLabel: 'Cancel'
+            })
+
+            var sendMsg = function () {
+                var isEmpty = chat.isEmpty(true);
+                if (isEmpty) return;
+                document.getElementById('msg1').innerHTML = chat.getHtml({ needUserId: true });
+            };
+            chat.enterSend = function () {
+                sendMsg();
+            };
+            document.getElementById('btn1').onclick = function () {
+                sendMsg();
+            };
+            document.getElementById('btn2').onclick = function () {
+                chat.setUserTag({ id: '1', name: 'Adam' });
+            };
+            document.getElementById('btn3').onclick = function () {
+                console.log('getCallUserList:', chat.getCallUserList());
+                console.log('getCallUserTagList:', chat.getCallUserTagList());
+            };
+            document.getElementById('btn4').onclick = function () {
+                chat.insertHtml('<img width="auto" height="22px" style="vertical-align: bottom" src="https://www.jianfv.top/image/bq1.gif">');
+            }
+            document.getElementById('btn5').onclick = function () {
+                chat.insertText('Hello, friend!');
+            }
+            document.getElementById('btn6').onclick = function () {
+                chat.enable();
+            }
+            document.getElementById('btn7').onclick = function () {
+                chat.showPCPointDialog();
+            }
+            document.getElementById('btn8').onclick = function () {
+                chat.showPCCheckDialog();
+            }
+            document.getElementById('btn9').onclick = function () {
+                var sendHtml = document.getElementById('msg1').innerHTML;
+                if (!sendHtml) return;
+                chat.reverseAnalysis(sendHtml, true);
+            }
+            document.getElementById('btn10').onclick = function () {
+                chat.undo();
+            }
+            document.getElementById('btn11').onclick = function () {
+                chat.clear();
+            }
+            document.getElementById('btn12').onclick = function () {
+                chat.dispose();
+            }
+        };
+
+        System.register(['ChatArea'], function (_export, _context) {
+            return {
+                setters: [
+                    function (target) {
+                        initChat(target.C);
+                    },
+                ],
+                execute: function () {
+                    _export();
+                },
+            };
+        });
+    </script>
+</body>
+</html>
