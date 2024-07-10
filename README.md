@@ -5,7 +5,7 @@
     <h4>A purely JavaScript encapsulated chat box that is compatible with various frameworks, suitable for both PC and H5 interactions.</h4>
     <p align="center">
         <a href="https://www.npmjs.com/package/chatarea">
-        <img src="https://img.shields.io/badge/npm-v4.4.7-blue" alt="version" />
+        <img src="https://img.shields.io/badge/npm-v4.4.8-blue" alt="version" />
         </a>
         <a href="https://www.npmjs.com/package/chatarea">
         <img src="https://img.shields.io/badge/js-59kb-red" alt="size" />
