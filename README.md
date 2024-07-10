@@ -21,7 +21,7 @@
 
 #### Project Structure
 ```angular2html
-|-- chat-area-issues
+|-- chat-area
     |
     |-- es5 // Compatibility with Older Browsers
     |   |-- ChatArea.css
