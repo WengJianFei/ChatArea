@@ -5,7 +5,7 @@
     <h4>A purely JavaScript encapsulated chat box that is compatible with various frameworks, suitable for both PC and H5 interactions.</h4>
     <p align="center">
         <a href="https://www.npmjs.com/package/chatarea">
-        <img src="https://img.shields.io/badge/npm-v4.4.3-blue" alt="version" />
+        <img src="https://img.shields.io/badge/npm-v4.4.7-blue" alt="version" />
         </a>
         <a href="https://www.npmjs.com/package/chatarea">
         <img src="https://img.shields.io/badge/js-59kb-red" alt="size" />
@@ -18,22 +18,6 @@
         </a>
     </p>
 </div>
-
-#### Project Structure
-```angular2html
-|-- chat-area
-    |
-    |-- es5 // Compatibility with Older Browsers
-    |   |-- ChatArea.css
-    |   |-- ChatArea.js
-    |   |-- System.js
-    |
-    |-- lib
-    |    |-- ChatArea.css
-    |    |-- ChatArea.js
-    |
-    |-- demo.html // Example Page
-```
 
 <h3>
   <a href="https://www.jianfv.top/ChatAreaDoc/" target="_blank">View detailed usage documentation</a>
