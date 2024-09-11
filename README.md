@@ -5,19 +5,29 @@
     <h4>A purely JavaScript encapsulated chat box that is compatible with various frameworks, suitable for both PC and H5 interactions.</h4>
     <p align="center">
         <a href="https://www.npmjs.com/package/chatarea">
-        <img src="https://img.shields.io/badge/npm-v4.5.2-blue" alt="version" />
-        </a>
-        <a href="https://www.npmjs.com/package/chatarea">
-        <img src="https://img.shields.io/badge/js-60kb-red" alt="size" />
-        </a>
-        <a href="https://www.npmjs.com/package/chatarea">
-        <img src="https://img.shields.io/badge/css-18kb-green" alt="size" />
+        <img src="https://img.shields.io/badge/npm-v4.6.5-blue" alt="version" />
         </a>
         <a href="https://www.npmjs.com/package/chatarea">
         <img src="https://img.shields.io/badge/License-MIT-yellow" />
         </a>
     </p>
 </div>
+
+#### Project Structure
+```angular2html
+|-- chat-area
+    |
+    |-- es5 // Compatibility with older browser versions
+    |   |-- ChatArea.css
+    |   |-- ChatArea.js
+    |   |-- System.js
+    |
+    |-- lib
+    |    |-- ChatArea.css
+    |    |-- ChatArea.js
+    |
+    |-- demo.html // Example page
+```
 
 <h3>
   <a href="https://www.jianfv.top/ChatAreaDoc/" target="_blank">View detailed usage documentation</a>
@@ -45,18 +55,11 @@ const chat = new ChatArea({
         {
             id: '2',
             name: 'Benjamin'
-        },
-        {
-            id: '5',
-            name: 'Daniel'
-        },
-        {
-            id: '6',
-            name: 'Ethan'
         }
     ],
     placeholder: 'Type "@" to bring up the selection window',
     // more config...
+    maxLength: 2000, // Chat box maximum text length limit, no limit if not configured
     copyType: ['text', 'image'], // When allowing for pasting content from the clipboard into the input field, the default types that are accepted are: ['text'].
     userProps: { // Renaming the property names id, avatar, and pinyin in the userList to match the corresponding property names used in the actual business data
         id: 'id',
@@ -82,6 +85,11 @@ chat.updateConfig({
     needCallEvery: false,
     placeholder: 'new placeholder',
     // more config...
+})
+
+// Monitor keyboard to trigger sending events
+chat.addEventListener('enterSend', () => {
+    // send msg
 })
 
 // Get the simplified text content of the chat box
@@ -134,6 +142,9 @@ chat.showH5Dialog()
 
 // Undo the last chat box operation
 chat.undo()
+
+// Redo the last chat box operation
+chat.redo()
 
 // Modify the default copywriting for the PC cursor selection pop-up window
 chat.revisePCPointDialogLabel({

@@ -63,6 +63,7 @@
         <button id="btn8">Multi-select people</button>
         <button id="btn9">Fill the sent message back into the input box</button>
         <button id="btn10">Perform undo</button>
+        <button id="btn13">Perform redo</button>
         <button id="btn11">Clear input box</button>
         <button id="btn12">Destroy instance</button>
     </div>
@@ -122,9 +123,7 @@
                 if (isEmpty) return;
                 document.getElementById('msg1').innerHTML = chat.getHtml({ needUserId: true });
             };
-            chat.enterSend = function () {
-                sendMsg();
-            };
+            chat.addEventListener('enterSend', sendMsg);
             document.getElementById('btn1').onclick = function () {
                 sendMsg();
             };
@@ -163,6 +162,9 @@
             }
             document.getElementById('btn12').onclick = function () {
                 chat.dispose();
+            }
+            document.getElementById('btn13').onclick = function () {
+                chat.redo();
             }
         };
 
